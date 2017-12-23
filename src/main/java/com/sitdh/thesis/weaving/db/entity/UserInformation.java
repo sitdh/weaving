@@ -1,6 +1,7 @@
 package com.sitdh.thesis.weaving.db.entity;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -37,7 +38,7 @@ public class UserInformation {
 	@Column(name="provider_id")
 	private String defaultProviderId;
 	
-	@OneToMany(mappedBy="userInformation", cascade=CascadeType.ALL)
+	@OneToMany(mappedBy="userInfo", cascade=CascadeType.ALL)
 	private Set<Credential> credentials;
 	
 	@Column(name="create_date", insertable=false, updatable=false, nullable=false)
@@ -57,17 +58,16 @@ public class UserInformation {
 		lastupdate = new Date();
 	}
 	
-	public UserInformation(String uid, String email, String displayName, String phoneNumber, String photoURL, String defaultProviderId, Set<Credential> credentials) {
+	public UserInformation(String uid, String email, String displayName, String phoneNumber, String photoURL, String defaultProviderId, List<Credential> credentials) {
 		this.setUserId(uid);
 		this.setEmail(email);
 		this.setDisplayName(displayName);
 		this.setPhoneNumber(phoneNumber);
 		this.setPhotoURL(photoURL);
 		this.setDefaultProviderId(defaultProviderId);
-		this.setCredentials(credentials);
 	}
 	
-	public UserInformation(String uid, String email, String displayName, String phoneNumber, String photoURL, String defaultProviderId, Set<Credential> credentials, Date createDate, Date lastupdate) {
+	public UserInformation(String uid, String email, String displayName, String phoneNumber, String photoURL, String defaultProviderId, List<Credential> credentials, Date createDate, Date lastupdate) {
 		this(uid, email, displayName, phoneNumber, photoURL, defaultProviderId, credentials);
 		this.setCreateDate(createDate);
 		this.setLastupdate(lastupdate);
@@ -122,14 +122,6 @@ public class UserInformation {
 		this.defaultProviderId = defaultProviderId;
 	}
 
-	public Set<Credential> getCredentials() {
-		return credentials;
-	}
-
-	public void setCredentials(Set<Credential> credentials) {
-		this.credentials = credentials;
-	}
-
 	public Date getCreateDate() {
 		return createDate;
 	}
@@ -144,6 +136,14 @@ public class UserInformation {
 
 	public void setLastupdate(Date lastupdate) {
 		this.lastupdate = lastupdate;
+	}
+
+	public Set<Credential> getCredentials() {
+		return credentials;
+	}
+
+	public void setCredentials(Set<Credential> credentials) {
+		this.credentials = credentials;
 	}
 	
 }
