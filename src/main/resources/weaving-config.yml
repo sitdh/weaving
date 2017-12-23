@@ -1,0 +1,3 @@
+weaving:
+  repository:
+    local-repository: /tmp/weaving
